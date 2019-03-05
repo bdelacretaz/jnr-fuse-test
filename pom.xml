@@ -27,7 +27,7 @@
   <version>0.1.1-SNAPSHOT</version>
   
   <properties>
-    <mainClass>ru.serce.jnrfuse.examples.MemoryFS</mainClass>
+    <mainClass>ch.x42.MemoryFS</mainClass>
   </properties>
   
   <repositories>

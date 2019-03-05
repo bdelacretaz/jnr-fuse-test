@@ -1,4 +1,4 @@
-package ru.serce.jnrfuse.examples;
+package ch.x42;
 
 
 import jnr.ffi.Platform;
@@ -21,6 +21,7 @@ import java.util.List;
 
 import static jnr.ffi.Platform.OS.WINDOWS;
 
+/** This example is copied from https://github.com/SerCeMan/jnr-fuse */
 public class MemoryFS extends FuseStubFS {
     private class MemoryDirectory extends MemoryPath {
         private List<MemoryPath> contents = new ArrayList<>();
