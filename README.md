@@ -7,6 +7,7 @@ For now this works in a Docker image but exporting the mounted volume with -v do
 work, MemoryFS files are not visible from the host. Probably because the Docker mount
 happens before the MemoryFS mount.
 
+    mvn clean install
     docker build . -t jnr
     docker run --privileged jnr
     
