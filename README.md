@@ -9,15 +9,14 @@ happens before the MemoryFS mount.
 
     mvn clean install
     docker build . -t jnr
-    docker run --privileged jnr
+    docker run -e USERNAME=test -e PASSWORD=test --privileged -p 1234:80 jnr
     
     Files at Tue Mar  5 16:03:08 UTC 2019
 
     Files at Tue Mar  5 16:03:09 UTC 2019
-    /test/jnrmount/Sample file.txt
-    /test/jnrmount/Directory with files/hello.txt
-    /test/jnrmount/Directory with files/hello again.txt
-    /test/jnrmount/Directory with files/Sample nested directory/So deep.txt
+    /var/webdav/jnr/Sample file.txt
+    /var/webdav/jnr/Directory with files/hello.txt
     ...
     
     
+The WebDAV setup is based on https://github.com/MorrisJobke/owncloud-docker/tree/master/webdav

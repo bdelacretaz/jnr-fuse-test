@@ -23,6 +23,8 @@ import static jnr.ffi.Platform.OS.WINDOWS;
 
 /** This example is copied from https://github.com/SerCeMan/jnr-fuse */
 public class MemoryFS extends FuseStubFS {
+    public static final String DEFAULT_MOUNT_PATH = "/jnr";
+    
     private class MemoryDirectory extends MemoryPath {
         private List<MemoryPath> contents = new ArrayList<>();
 
@@ -207,13 +209,9 @@ public class MemoryFS extends FuseStubFS {
     public static void main(String[] args) {
         MemoryFS memfs = new MemoryFS();
         try {
-            String path;
-            switch (Platform.getNativePlatform().getOS()) {
-                case WINDOWS:
-                    path = "J:\\";
-                    break;
-                default:
-                    path = "/test/jnrmount";
+            String path = args.length > 0 ? args[0] : DEFAULT_MOUNT_PATH;
+            if(Platform.getNativePlatform().getOS().equals(WINDOWS)) {
+                path = "J:\\";
             }
             memfs.mount(Paths.get(path), true, true);
         } finally {
