@@ -17,6 +17,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static jnr.ffi.Platform.OS.WINDOWS;
@@ -223,15 +224,15 @@ public class MemoryFS extends FuseStubFS {
 
     public MemoryFS() {
         // Sprinkle some files around
-        rootDirectory.add(new MemoryFile("Sample file.txt", "Hello there, feel free to look around.\n"));
-        rootDirectory.add(new MemoryDirectory("Sample directory"));
-        MemoryDirectory dirWithFiles = new MemoryDirectory("Directory with files");
+        rootDirectory.add(new MemoryFile("sample-file.txt", "Hello there at " + new Date() + "\n"));
+        rootDirectory.add(new MemoryDirectory("sampledir"));
+        MemoryDirectory dirWithFiles = new MemoryDirectory("dir-with-files");
         rootDirectory.add(dirWithFiles);
         dirWithFiles.add(new MemoryFile("hello.txt", "This is some sample text.\n"));
-        dirWithFiles.add(new MemoryFile("hello again.txt", "This another file with text in it! Oh my!\n"));
-        MemoryDirectory nestedDirectory = new MemoryDirectory("Sample nested directory");
+        dirWithFiles.add(new MemoryFile("hello-again.txt", "This another file with text in it! Oh my!\n"));
+        MemoryDirectory nestedDirectory = new MemoryDirectory("nested-dir");
         dirWithFiles.add(nestedDirectory);
-        nestedDirectory.add(new MemoryFile("So deep.txt", "Man, I'm like, so deep in this here file structure.\n"));
+        nestedDirectory.add(new MemoryFile("deep-file.txt", "Man, I'm like, so deep in this here file structure.\n"));
     }
 
     @Override
