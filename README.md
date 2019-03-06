@@ -3,19 +3,25 @@ jnr-fuse-test
 
 Testing the https://github.com/SerCeMan/jnr-fuse library to implement FUSE filesystems in Java.
 
-For now this works in a Docker image but exporting the mounted volume with -v does not
-work, MemoryFS files are not visible from the host. Probably because the Docker mount
-happens before the MemoryFS mount.
+For now this works in a Docker image but exporting the mounted volume via WebDAV does not work,
+requesting http://localhost:1234/webdav/javafuse/sample-file.txt returns a 403. 
+
+Even though http://localhost:1234/webdav/tmp-symlink/ demonstrates that mod_dav correctly follows 
+symlinks, but it looks like it's acting differently with a mounted FUSE filesystem.
+
+Here's how to run this:
 
     mvn clean install
     docker build . -t jnr
     docker run -e USERNAME=test -e PASSWORD=test --privileged -p 1234:80 jnr
     
-    Files at Tue Mar  5 16:03:08 UTC 2019
+    Files at Wed Mar  6 11:14:38 UTC 2019
+    /var/webdav/1551870878.txt
 
-    Files at Tue Mar  5 16:03:09 UTC 2019
-    /var/webdav/jnr/Sample file.txt
-    /var/webdav/jnr/Directory with files/hello.txt
+    Files at Wed Mar  6 11:14:39 UTC 2019
+    /var/webdav/1551870878.txt
+    /var/webdav/javafuse/sample-file.txt
+    /var/webdav/javafuse/dir-with-files/hello.txt
     ...
     
     
